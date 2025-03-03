@@ -1,6 +1,6 @@
 # mini-e-commerce-
 
-# Produit Management System 🛒
+# Product Management System 🛒
 
 A Java-based web application for managing products (produits) with a sleek and modern user interface. This project demonstrates CRUD (Create, Read, Update, Delete) operations using JSP, Servlets, and a MySQL database.
 
