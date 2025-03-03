@@ -2,7 +2,7 @@
 
 # Product Management System 🛒
 
-A Java-based web application for managing products (produits) with a sleek and modern user interface. This project demonstrates CRUD (Create, Read, Update, Delete) operations using JSP, Servlets, and a MySQL database.
+A Java-based web application for managing products  with a sleek and modern user interface. This project demonstrates CRUD (Create, Read, Update, Delete) operations using JSP, Servlets, and a MySQL database.
 
 ## Features ✨
 - **Add Products**: Easily add new products with details like name, description, price, and image URL.
