@@ -1,0 +1,139 @@
+body, h1, table, a, button, form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.btn-add {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #6a11cb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.btn-add:hover {
+    background: #2575fc;
+    transform: translateY(-2px);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+}
+
+table th {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+}
+
+table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+table tr:last-child {
+    border-bottom: none;
+}
+
+table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.product-image {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-edit,
+.btn-details,
+.btn-delete {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-edit {
+    background: #6a11cb;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background: #2575fc;
+    transform: translateY(-2px);
+}
+
+.btn-details {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-details:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #ff1a1a;
+    transform: translateY(-2px);
+}
