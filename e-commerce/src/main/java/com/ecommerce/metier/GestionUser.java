@@ -13,7 +13,7 @@ public class GestionUser implements IGestionUser {
     public void registerUser(User user) throws SQLException {
 
         if (FunctionsUtils.isValidPassword(user.getPassword())) {
-            userDAO.registerUser(user);  //todo : add hashing
+            userDAO.registerUser(user);
         } else {
             throw new IllegalArgumentException("Password does not meet the required criteria.");
         }
@@ -22,9 +22,13 @@ public class GestionUser implements IGestionUser {
     @Override
     public User authenticateUser(String email, String password) throws SQLException {
         User user = userDAO.getUserByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {  //todo : add hashing
-            return user;
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid email or password");
         }
-        return null;
+        if (!FunctionsUtils.checkPassword(password, user.getPassword())) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+        return user;
     }
+
 }

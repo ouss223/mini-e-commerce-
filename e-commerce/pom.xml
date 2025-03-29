@@ -34,12 +34,21 @@
     </dependency>
 
     <!-- MySQL Connector -->
-
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.29</version> <!-- This is a valid version -->
     </dependency>
+
+
+
+    <!-- JBcrypt -->
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.4</version>
+    </dependency>
+
 
 
 
@@ -54,6 +63,7 @@
   <build>
     <finalName>e-commerce</finalName>
     <plugins>
+
       <!-- Maven Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

@@ -3,12 +3,14 @@ package com.ecommerce.servlet;
 import com.ecommerce.metier.GestionProduit;
 import com.ecommerce.metier.IGestionProduit;
 import com.ecommerce.model.Produit;
+import com.ecommerce.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -17,17 +19,19 @@ import java.util.List;
 public class ProduitServlet extends HttpServlet {
     private IGestionProduit gestionProduit;
 
-
-
-
-
     @Override
     public void init() {
-        gestionProduit = new GestionProduit(); // Using Metier Layer
+        gestionProduit = new GestionProduit();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
         String action = request.getParameter("action");
         if (action == null) action = "list";
 
@@ -74,6 +78,14 @@ public class ProduitServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Check if the user is logged in (i.e., check if session exists and has user attribute)
+        HttpSession session = request.getSession(false); // false means don't create a new session if it doesn't exist
+        if (session == null || session.getAttribute("user") == null) {
+            // If no valid session, redirect to the login page
+            response.sendRedirect("login");
+            return;
+        }
+
         String action = request.getParameter("action");
 
         try {

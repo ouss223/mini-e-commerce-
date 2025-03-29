@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="styles/details.css">
 </head>
 <body>
+<%@ include file="header.jsp" %>
 <div class="container">
     <h1>Details</h1>
     <% Produit p = (Produit) request.getAttribute("produit"); %>

@@ -1,4 +1,6 @@
 package com.ecommerce.utils;
+import org.mindrot.jbcrypt.BCrypt;
+
 
 import java.util.regex.Pattern;
 
@@ -14,7 +16,6 @@ public class FunctionsUtils {
 
 
     public static boolean isValidPassword(String password) {
-        // Updated regex pattern: no special characters, only alphanumeric and at least 8 characters
         String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 
         if (password == null) {
@@ -22,5 +23,15 @@ public class FunctionsUtils {
         }
 
         return Pattern.matches(PASSWORD_PATTERN, password);
+    }
+
+    public static String hashPassword(String plainTextPassword) {
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+
+
+
+    public static boolean checkPassword(String plainTextPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainTextPassword, hashedPassword);
     }
 }

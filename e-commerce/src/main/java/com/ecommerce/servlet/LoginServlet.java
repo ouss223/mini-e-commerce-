@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -18,12 +19,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() {
-        gestionUser = new GestionUser(); // Using the Metier layer
+        gestionUser = new GestionUser();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Forward to the login page (GET request)
+        // Display the login page
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
@@ -33,16 +34,18 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try {
-            User user = gestionUser.authenticateUser(email, password); // Authentication logic
-            if (user != null) {
-                request.getSession().setAttribute("user", user);
-                response.sendRedirect("produit"); // Redirect to produit page on success
-            } else {
-                request.setAttribute("errorMessage", "Invalid email or password");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
-            }
+            User user = gestionUser.authenticateUser(email, password);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+
+            response.sendRedirect("produit");
+        } catch (IllegalArgumentException e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Database error during login", e);
         }
     }
+
 }

@@ -2,19 +2,25 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.ecommerce.utils.FunctionsUtils" %>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Liste des Produits</title>
-  <link rel="stylesheet" type="text/css" href="styles/liste.css">
+     <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+      >
 </head>
-<body>
+<body class="d-flex flex-column">
+<%@ include file="header.jsp" %>
 <div class="container">
   <h1>Produits</h1>
 
   <!-- Search Form -->
   <form action="produit" method="get">
-    <input type="text" name="search" placeholder="Rechercher un produit..."
+    <input type="text" name="search" class="form-control" placeholder="Rechercher un produit..."
            value="<%= request.getAttribute("searchQuery") != null ? request.getAttribute("searchQuery") : "" %>">
     <button type="submit">Rechercher</button>
   </form>
@@ -26,25 +32,15 @@
 
   <% if (produits != null && !produits.isEmpty()) { %>
     <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Description</th>
-          <th>Prix</th>
-          <th>Image</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+
       <tbody>
         <% for (Produit p : produits) { %>
-          <tr>
-            <td><%= p.getId() %></td>
-            <td><%= p.getNom() %></td>
-            <td><%= FunctionsUtils.Slice(p.getDescription(),40) %></td>
-            <td><%= p.getPrix() %></td>
-            <td><img src="<%= p.getImage() %>" alt="Produit Image" class="product-image"></td>
-            <td class="actions">
+          <div>
+            <h1><%= p.getNom() %></h1>
+            <p><%= FunctionsUtils.Slice(p.getDescription(),40) %></p>
+            <h2><%= p.getPrix() %></h2>
+            <div><img src="<%= p.getImage() %>" alt="Produit Image" class="product-image"></div>
+            <div>
               <a href="produit?action=edit&id=<%= p.getId() %>" class="btn-edit">Modifier</a>
               <a href="produit?action=details&id=<%= p.getId() %>" class="btn-details">Details</a>
               <form action="produit" method="post">
@@ -52,8 +48,8 @@
                 <input type="hidden" name="id" value="<%= p.getId() %>">
                 <button type="submit" class="btn-delete">Supprimer</button>
               </form>
-            </td>
-          </tr>
+            </div>
+          </div>
         <% } %>
       </tbody>
     </table>

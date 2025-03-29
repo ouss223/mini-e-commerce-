@@ -24,7 +24,6 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Forward to the registration page (GET request)
         request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
@@ -37,17 +36,23 @@ public class RegisterServlet extends HttpServlet {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(FunctionsUtils.hashPassword(password));
 
         try {
-            gestionUser.registerUser(user); // Will throw exception if password is invalid
-            response.sendRedirect("login.jsp"); // Redirect to login page on success
+            gestionUser.registerUser(user);
+            response.sendRedirect("login");
         } catch (IllegalArgumentException e) {
-            // If password is invalid, show an error message
+            // Handle validation exceptions like password format issues
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         } catch (SQLException e) {
-            throw new ServletException("Database error during registration", e);
+            // Handle SQL exceptions, such as duplicate email
+            if (e.getMessage().contains("Duplicate entry")) {
+                request.setAttribute("errorMessage", "The email is already registered. Please choose a different one.");
+            } else {
+                request.setAttribute("errorMessage", "Database error during registration. Please try again.");
+            }
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
     }
 }
