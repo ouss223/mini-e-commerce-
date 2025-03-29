@@ -11,7 +11,7 @@ public class GestionUser implements IGestionUser {
 
     @Override
     public void registerUser(User user) throws SQLException {
-        // Validate password before registering
+
         if (FunctionsUtils.isValidPassword(user.getPassword())) {
             userDAO.registerUser(user);  //todo : add hashing
         } else {

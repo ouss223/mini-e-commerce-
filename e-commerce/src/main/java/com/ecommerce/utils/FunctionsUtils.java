@@ -13,10 +13,10 @@ public class FunctionsUtils {
 
 
 
-    private static final String PASSWORD_PATTERN =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$";
-
     public static boolean isValidPassword(String password) {
+        // Updated regex pattern: no special characters, only alphanumeric and at least 8 characters
+        String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
+
         if (password == null) {
             return false;
         }
