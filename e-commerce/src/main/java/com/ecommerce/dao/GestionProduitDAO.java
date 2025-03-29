@@ -91,11 +91,13 @@ public class GestionProduitDAO implements IGestionProduitDAO {
     @Override
     public List<Produit> searchProduits(String keyword) throws SQLException {
         List<Produit> produits = new ArrayList<>();
-        String query = "SELECT * FROM produits WHERE nom LIKE ?";
+        String query = "SELECT * FROM produits WHERE nom LIKE ? OR description LIKE ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, "%" + keyword + "%"); // Search for partial matches
+            pstmt.setString(1, "%" + keyword + "%"); // Search in `nom`
+            pstmt.setString(2, "%" + keyword + "%"); // Search in `description`
+
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     Produit p = new Produit();
@@ -110,4 +112,5 @@ public class GestionProduitDAO implements IGestionProduitDAO {
         }
         return produits;
     }
+
 }
