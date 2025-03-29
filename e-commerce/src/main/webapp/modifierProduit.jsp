@@ -1,4 +1,4 @@
-<%@ page import="com.example.model.Produit" %>
+<%@ page import="com.ecommerce.model.Produit" %>
 <!DOCTYPE html>
 <html>
 <head>

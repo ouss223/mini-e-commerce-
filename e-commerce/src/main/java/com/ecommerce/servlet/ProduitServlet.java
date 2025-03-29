@@ -1,16 +1,28 @@
-package com.example.servlet;
+package com.ecommerce.servlet;
 
-import com.example.dao.ProduitDAO;
-import com.example.model.Produit;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import com.ecommerce.metier.GestionProduit;
+import com.ecommerce.metier.IGestionProduit;
+import com.ecommerce.model.Produit;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "ProduitServlet", urlPatterns = {"/produit"})
 public class ProduitServlet extends HttpServlet {
-    private ProduitDAO produitDAO = new ProduitDAO();
+    private IGestionProduit gestionProduit;
 
+    @Override
+    public void init() {
+        gestionProduit = new GestionProduit(); // Using Metier Layer
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) action = "list";
@@ -21,25 +33,27 @@ public class ProduitServlet extends HttpServlet {
                     break;
                 case "edit":
                     int idEdit = Integer.parseInt(request.getParameter("id"));
-                    Produit produitEdit = produitDAO.getProduitById(idEdit);
+                    Produit produitEdit = gestionProduit.getProduitById(idEdit);
                     request.setAttribute("produit", produitEdit);
                     request.getRequestDispatcher("/modifierProduit.jsp").forward(request, response);
                     break;
                 case "details":
                     int idDetails = Integer.parseInt(request.getParameter("id"));
-                    Produit produitDetails = produitDAO.getProduitById(idDetails);
+                    Produit produitDetails = gestionProduit.getProduitById(idDetails);
                     request.setAttribute("produit", produitDetails);
                     request.getRequestDispatcher("/detailsProduit.jsp").forward(request, response);
                     break;
                 default:
-                    request.setAttribute("produits", produitDAO.getAllProduits());
+                    List<Produit> produits = gestionProduit.getAllProduits();
+                    request.setAttribute("produits", produits);
                     request.getRequestDispatcher("/listeProduits.jsp").forward(request, response);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ServletException(e);
         }
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         try {
@@ -50,7 +64,7 @@ public class ProduitServlet extends HttpServlet {
                     pAdd.setDescription(request.getParameter("description"));
                     pAdd.setPrix(Double.parseDouble(request.getParameter("prix")));
                     pAdd.setImage(request.getParameter("image"));
-                    produitDAO.addProduit(pAdd);
+                    gestionProduit.addProduit(pAdd);
                     break;
                 case "update":
                     Produit pUpdate = new Produit();
@@ -59,15 +73,15 @@ public class ProduitServlet extends HttpServlet {
                     pUpdate.setDescription(request.getParameter("description"));
                     pUpdate.setPrix(Double.parseDouble(request.getParameter("prix")));
                     pUpdate.setImage(request.getParameter("image"));
-                    produitDAO.updateProduit(pUpdate);
+                    gestionProduit.updateProduit(pUpdate);
                     break;
                 case "delete":
                     int idDelete = Integer.parseInt(request.getParameter("id"));
-                    produitDAO.deleteProduit(idDelete);
+                    gestionProduit.deleteProduit(idDelete);
                     break;
             }
             response.sendRedirect("produit");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new ServletException(e);
         }
     }

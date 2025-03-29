@@ -1,4 +1,4 @@
-<%@ page import="com.example.model.Produit" %>
+<%@ page import="com.ecommerce.model.Produit" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,13 @@
 <body>
 <div class="container">
   <h1>Produits</h1>
+
+  <!-- Add a search form -->
+  <form action="produit" method="get">
+    <input type="text" name="search" placeholder="Rechercher un produit..." value="<%= request.getAttribute("searchQuery") != null ? request.getAttribute("searchQuery") : "" %>">
+    <button type="submit">Rechercher</button>
+  </form>
+
   <a href="produit?action=new" class="btn-add">Ajouter</a>
   <table>
     <thead>
