@@ -1,5 +1,7 @@
 <%@ page import="com.ecommerce.model.Produit" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.ecommerce.utils.FunctionsUtils" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +41,7 @@
           <tr>
             <td><%= p.getId() %></td>
             <td><%= p.getNom() %></td>
-            <td><%= p.getDescription() %></td>
+            <td><%= FunctionsUtils.Slice(p.getDescription(),40) %></td>
             <td><%= p.getPrix() %></td>
             <td><img src="<%= p.getImage() %>" alt="Produit Image" class="product-image"></td>
             <td class="actions">

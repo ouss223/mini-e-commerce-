@@ -17,6 +17,10 @@ import java.util.List;
 public class ProduitServlet extends HttpServlet {
     private IGestionProduit gestionProduit;
 
+
+
+
+
     @Override
     public void init() {
         gestionProduit = new GestionProduit(); // Using Metier Layer

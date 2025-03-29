@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Détails du Produit</title>
+    <title>Details du Produit</title>
     <link rel="stylesheet" type="text/css" href="styles/details.css">
 </head>
 <body>
 <div class="container">
-    <h1>Détails</h1>
+    <h1>Details</h1>
     <% Produit p = (Produit) request.getAttribute("produit"); %>
     <div class="details-card">
         <p><strong>ID:</strong> <%= p.getId() %></p>
