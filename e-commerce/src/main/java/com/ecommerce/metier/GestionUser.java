@@ -13,9 +13,11 @@ public class GestionUser implements IGestionUser {
     public void registerUser(User user) throws SQLException {
 
         if (FunctionsUtils.isValidPassword(user.getPassword())) {
+            String hash = FunctionsUtils.hashPassword(user.getPassword()) ;
+            user.setPassword(hash);
             userDAO.registerUser(user);
         } else {
-            throw new IllegalArgumentException("Password does not meet the required criteria.");
+            throw new IllegalArgumentException("Password is too weak");
         }
     }
 

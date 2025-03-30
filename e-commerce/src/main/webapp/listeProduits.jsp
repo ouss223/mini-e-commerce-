@@ -13,12 +13,12 @@
           rel="stylesheet"
       >
 </head>
-<body class="d-flex flex-column pb-5">
+<body class="d-flex flex-column pb-5" style="background-color : #f2f4f7">
 <%@ include file="header.jsp" %>
 <div>
 
   <form action="produit" method="get" class="d-flex gap-3 align-items-center container mt-4">
-      <a href="produit?action=new" class="btn m-0 p-0 h-100 d-flex align-items-center">
+      <a href="produit?action=new" class="btn m-0 p-0 h-100 d-flex align-items-center bg-light">
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -26,7 +26,7 @@
       </a>
     <input type="text" name="search" class="form-control border-2" placeholder="Rechercher un produit..."
            value="<%= request.getAttribute("searchQuery") != null ? request.getAttribute("searchQuery") : "" %>">
-    <button type="submit" class="btn border border-2">Rechercher</button>
+    <button type="submit" class="btn border border-2 bg-light">Rechercher</button>
 
   </form>
 
@@ -37,7 +37,7 @@
     <div class="d-flex flex-wrap gap-4 px-5 mt-3 justify-content-center">
         <% for (Produit p : produits) { %>
 
-          <div class='d-flex border  border-3 p-2 mt-4 rounded-4 flex-column justify-content-between' style="width : 320px ; height : 530px ; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+          <div class='d-flex border  border-3 p-2 mt-4 rounded-4 flex-column justify-content-between' style="width : 320px ; height : 530px ; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); background-color : #f2f4f7
 ">
           <div>
              <div class="w-100 overflow-hidden " style="height:220px">

@@ -3,37 +3,45 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="styles/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #f2f4f7">
+<%@ include file="header.jsp" %>
+
 <div class="container">
-    <h1>Login</h1>
+    <h1 class="fs-2 mb-4 mt-3 text-center mt-5">Login</h1>
+    <div class="d-flex justify-content-center pb-5">
+        <form action="login" method="post" class="mt-2 border border-3 p-4 rounded-4 w-50 bg-light"
+              style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15)">
 
-    <%-- Display Error Message if Login Fails --%>
-    <div class="error-message">
-        <%
-            String errorMessage = (String) request.getAttribute("errorMessage");
-            if (errorMessage != null) {
-        %>
-            <p style="color: red;"><%= errorMessage %></p>
-        <% } %>
+            <%-- Display Error Message if Login Fails --%>
+            <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+            <% if (errorMessage != null) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= errorMessage %>
+                </div>
+            <% } %>
+
+            <div class="mb-4">
+                <label class="fs-5 mb-2 ms-1" for="email">Email:</label>
+                <input type="email" id="email" name="email" required class="form-control py-2 fs-5 border-3">
+            </div>
+
+            <div class="mb-4">
+                <label class="fs-5 mb-2 ms-1" for="password">Password:</label>
+                <input type="password" id="password" name="password" required class="form-control py-2 fs-5 border-3">
+            </div>
+
+            <div class="d-flex justify-content-center gap-2">
+                <button type="submit" class="btn fw-bold border border-3">Login</button>
+            </div>
+
+            <p class="mt-3 text-center">
+                <a href="register.jsp" class="text-decoration-none">Don't have an account? Register</a>
+            </p>
+        </form>
     </div>
-
-    <form action="login" method="post">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <button type="submit">Login</button>
-    </form>
-
-    <a href="register.jsp">Don't have an account? Register</a>
 </div>
+
 </body>
 </html>

@@ -3,7 +3,6 @@ package com.ecommerce.servlet;
 import com.ecommerce.metier.GestionUser;
 import com.ecommerce.metier.IGestionUser;
 import com.ecommerce.model.User;
-import com.ecommerce.utils.FunctionsUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,17 +35,15 @@ public class RegisterServlet extends HttpServlet {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(FunctionsUtils.hashPassword(password));
+        user.setPassword(password);
 
         try {
             gestionUser.registerUser(user);
             response.sendRedirect("login");
         } catch (IllegalArgumentException e) {
-            // Handle validation exceptions like password format issues
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         } catch (SQLException e) {
-            // Handle SQL exceptions, such as duplicate email
             if (e.getMessage().contains("Duplicate entry")) {
                 request.setAttribute("errorMessage", "The email is already registered. Please choose a different one.");
             } else {
