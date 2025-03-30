@@ -9,12 +9,11 @@
 <%@ include file="header.jsp" %>
 
 <div class="container">
-    <h1 class="fs-2 mb-4 mt-3 text-center mt-5">Login</h1>
+    <h1 class="fs-1 mb-4 mt-3 text-center mt-5">Login</h1>
     <div class="d-flex justify-content-center pb-5">
         <form action="login" method="post" class="mt-2 border border-3 p-4 rounded-4 w-50 bg-light"
               style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15)">
 
-            <%-- Display Error Message if Login Fails --%>
             <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
             <% if (errorMessage != null) { %>
                 <div class="alert alert-danger" role="alert">

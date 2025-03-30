@@ -80,7 +80,7 @@
         <% } %>
     </div>
   <% } else { %>
-    <p class="no-results">Aucun produit trouve.</p>
+    <p class="no-results mt-5  text-center fs-4 text-muted  ">Aucun produit trouve.</p>
   <% } %>
 </div>
 </body>
