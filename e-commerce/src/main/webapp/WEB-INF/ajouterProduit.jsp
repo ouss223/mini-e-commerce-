@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #f2f4f7">
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div class="container">
     <h1 class="fs-4 mt-3 text-center">Ajouter un Produit</h1>

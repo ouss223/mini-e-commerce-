@@ -9,7 +9,7 @@
           >
 </head>
 <body class="d-flex flex-column" style="background-color : #f2f4f7">
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div class="px-5 pt-5 ">
 <div class="container-fluid px-5 justify-content-center align-items-center py-5 mt-1 gap-4 d-flex rox border border-3  rounded-4 bg-light">

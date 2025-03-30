@@ -38,21 +38,21 @@ public class ProduitServlet extends HttpServlet {
         try {
             switch (action) {
                 case "new":
-                    request.getRequestDispatcher("/ajouterProduit.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/ajouterProduit.jsp").forward(request, response);
                     break;
 
                 case "edit":
                     int idEdit = Integer.parseInt(request.getParameter("id"));
                     Produit produitEdit = gestionProduit.getProduitById(idEdit);
                     request.setAttribute("produit", produitEdit);
-                    request.getRequestDispatcher("/modifierProduit.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/modifierProduit.jsp").forward(request, response);
                     break;
 
                 case "details":
                     int idDetails = Integer.parseInt(request.getParameter("id"));
                     Produit produitDetails = gestionProduit.getProduitById(idDetails);
                     request.setAttribute("produit", produitDetails);
-                    request.getRequestDispatcher("/detailsProduit.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/detailsProduit.jsp").forward(request, response);
                     break;
 
                 case "list":
@@ -68,7 +68,7 @@ public class ProduitServlet extends HttpServlet {
                     }
 
                     request.setAttribute("produits", produits);
-                    request.getRequestDispatcher("/listeProduits.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/listeProduits.jsp").forward(request, response);
                     break;
             }
         } catch (SQLException e) {
@@ -78,10 +78,8 @@ public class ProduitServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Check if the user is logged in (i.e., check if session exists and has user attribute)
         HttpSession session = request.getSession(false); // false means don't create a new session if it doesn't exist
         if (session == null || session.getAttribute("user") == null) {
-            // If no valid session, redirect to the login page
             response.sendRedirect("login");
             return;
         }

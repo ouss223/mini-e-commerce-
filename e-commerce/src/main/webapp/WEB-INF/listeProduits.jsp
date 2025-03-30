@@ -14,7 +14,7 @@
       >
 </head>
 <body class="d-flex flex-column pb-5" style="background-color : #f2f4f7">
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 <div>
 
   <form action="produit" method="get" class="d-flex gap-3 align-items-center container mt-4">

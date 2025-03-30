@@ -9,7 +9,7 @@
           >
 </head>
 <body style="background-color : #f2f4f7">
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div class="container">
     <% Produit p = (Produit) request.getAttribute("produit"); %>
